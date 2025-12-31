@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="htttp://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Laboratórios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="mt-4 bg-light">
+<h2 class="mb-4 text-center" th:text="${laboratorio.id} != null ? 'Editar Laboratório' : 'Novo Laboratório'">Novo Laboratório</h2>
+
+<form th:action="@{/laboratorios/save}" th:object="${laboratorio}" method="post" class="border rounded bg-white shadow-sm p-4">
+    <input type="hidden" th:field="*{id}">
+
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="mb-3 mt-3">
+                <label>Tipo</label>
+                <input class="form-control" th:field="*{tipo}" required th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}">
+                    Tipo não pode estar em vazio
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="mb-3 mt-3">
+                <label>Capacidade</label>
+                <input type="number" class="form-control" th:field="*{capacidade}" required th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('capacidade')}" th:errors="*{capacidade}">
+                    Capacidade precisa estar com valor positivo
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-2">
+            <div class="mb-3 mt-3">
+                <label>Computadores</label>
+                <input type="number" class="form-control" th:field="*{qtdComputadores}" required th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('qtdComputadores')}" th:errors="*{qtdComputadores}">
+                    Quantidade de Computadores precisa estar com valor positivo
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3 mt-3">
+                <label>O laboratório possui TV?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{tv}" value="true" required>
+                        <label class="form-check-label" th:for="${#ids.prev('tv')}">Sim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{tv}" value="false">
+                        <label class="form-check-label" th:for="${#ids.prev('tv')}">Não</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 class="mb-3"> Localização:</h5>
+    <div class="row g-3">
+        <div class="col-md-2">
+            <div class="mb-3">
+                <label>Andar</label>
+                <input type="number" class="form-control" th:field="*{andar}" required th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('andar')}" th:errors="*{andar}">
+                    Andar precisa estar com valor positivo
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="mb-3">
+                <label>Corredor</label>
+                <input type="number" class="form-control" th:field="*{corredor}" required th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('corredor')}" th:errors="*{corredor}">
+                    Corredor precisa estar com valor positivo
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+    <div class="mt-4">
+        <a th:if="${laboratorio.id != null}" class="btn btn-secondary" th:href="@{/laboratorios/list}">Voltar para a Lista</a>
+        <a th:if="${laboratorio.id == null}" class="btn btn-secondary" th:href="@{/admins/menu}">Voltar para o Menu</a>
+    </div>
+</form>
+
+</body>
+</html>

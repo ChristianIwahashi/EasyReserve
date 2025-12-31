@@ -1,0 +1,22 @@
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+
+# Maven/Build
+target/
+.mvn/wrapper/maven-wrapper.jar
+build/
+bin/
+out/
+
+# Arquivos sensíveis e Logs
+.env
+*.log
+application.properties
+application.yml
+
+# Outros
+.DS_Store
+Thumbs.db
